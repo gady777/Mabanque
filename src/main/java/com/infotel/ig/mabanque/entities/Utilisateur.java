@@ -29,4 +29,7 @@ public class Utilisateur implements Serializable{
     
     @NotNull
     private String password;
+    
+    @NotNull
+    private Role role;
 }
