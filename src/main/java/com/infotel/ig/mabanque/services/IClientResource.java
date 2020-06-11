@@ -1,6 +1,9 @@
 package com.infotel.ig.mabanque.services;
 
+import com.infotel.ig.mabanque.dto.CompteDto;
 import com.infotel.ig.mabanque.entities.Client;
+import com.infotel.ig.mabanque.entities.Compte;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -53,5 +56,37 @@ public interface IClientResource {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteClient(@PathParam("id") long id);
+    
+    
+    @GET
+    @Path("{id: \\d+}/comptes")
+    @Produces(value={MediaType.APPLICATION_JSON})
+    public ResponseEntity<List<Compte>> findCompteClients(@PathParam("id") long idClient);
+    
+    
+    @POST
+    @Path("{id: \\d+}/comptes")
+    @Produces(value={MediaType.APPLICATION_JSON})
+    @Consumes(value={MediaType.APPLICATION_JSON})
+    public ResponseEntity<Compte> ajouterCompteClient(@PathParam("id") long idClient, CompteDto compte);
+    
+    @PUT
+    @Path("{idClient: \\d+}/comptes/{idCompte: \\d+}")
+    @Produces(value={MediaType.APPLICATION_JSON})
+    @Consumes(value={MediaType.APPLICATION_JSON})
+    public ResponseEntity<Compte> modifierCompteClient(@PathParam("idClient") long idClient, @PathParam("idCompte")long idCompte, CompteDto compte);
+    
+    @DELETE
+    @Path("{idClient: \\d+}/comptes/{idCompte: \\d+}")
+    public void supprimerCompteClient(@PathParam("idClient")long idClient, @PathParam("idCompte")long idCompte);
+    
+    @GET
+    @Path("{idClient: \\d+}/comptes/{idCompte: \\d+}")
+    @Produces(value={MediaType.APPLICATION_JSON})
+    public ResponseEntity<Compte> renvoyerCompteClient(@PathParam("idClient")long idClient, @PathParam("idCompte") long idCompte);
+    
+    
+    
+    
     
 }

@@ -17,4 +17,5 @@ public interface CompteDao  extends JpaRepository<Compte, Long>{
     public List<Compte> findBySoldeGreaterThanEqual(double solde);
     public List<Compte> findByClient(Client c);
     public List<Compte> findByClientNom(String nom);
+    public Optional<Compte> findByIdAndClientId(long idCompte, long idClient);
 }
