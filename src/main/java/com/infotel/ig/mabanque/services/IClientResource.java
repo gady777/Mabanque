@@ -17,6 +17,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  *
@@ -32,46 +33,55 @@ public interface IClientResource {
     
     @GET
     @Path("/search")
+    @CrossOrigin
     @Produces(value = {MediaType.APPLICATION_JSON})
     public Page<Client> searchClients(@QueryParam("nom")String nom, @DefaultValue("0") @QueryParam("page")int page, @DefaultValue("20") @QueryParam("size")int pagesize);
     
     @GET
     @Path("{id: \\d+}")
+     @CrossOrigin
     @Produces(value ={MediaType.APPLICATION_JSON})
     public ResponseEntity<Client> findClient(@PathParam("id") long id);
     
     
     @PUT
     @Path("{id: \\d+}")
+     @CrossOrigin
     @Produces(value ={MediaType.APPLICATION_JSON})
     @Consumes(value ={MediaType.APPLICATION_JSON})
     public ResponseEntity<Client> updateClient(@PathParam("id") long id, Client client);
     
     
     @POST
+    @Path("/addclient")
+     @CrossOrigin
     @Produces(value ={MediaType.APPLICATION_JSON})
     @Consumes(value ={MediaType.APPLICATION_JSON})
     public ResponseEntity<Client> addClient(Client client);
     
     @DELETE
     @Path("{id: \\d+}")
+     @CrossOrigin
     public void deleteClient(@PathParam("id") long id);
     
     
     @GET
     @Path("{id: \\d+}/comptes")
+     @CrossOrigin
     @Produces(value={MediaType.APPLICATION_JSON})
     public ResponseEntity<List<Compte>> findCompteClients(@PathParam("id") long idClient);
     
     
     @POST
     @Path("{id: \\d+}/comptes")
+     @CrossOrigin
     @Produces(value={MediaType.APPLICATION_JSON})
     @Consumes(value={MediaType.APPLICATION_JSON})
     public ResponseEntity<Compte> ajouterCompteClient(@PathParam("id") long idClient, CompteDto compte);
     
     @PUT
     @Path("{idClient: \\d+}/comptes/{idCompte: \\d+}")
+     @CrossOrigin
     @Produces(value={MediaType.APPLICATION_JSON})
     @Consumes(value={MediaType.APPLICATION_JSON})
     public ResponseEntity<Compte> modifierCompteClient(@PathParam("idClient") long idClient, @PathParam("idCompte")long idCompte, CompteDto compte);
@@ -82,6 +92,7 @@ public interface IClientResource {
     
     @GET
     @Path("{idClient: \\d+}/comptes/{idCompte: \\d+}")
+     @CrossOrigin
     @Produces(value={MediaType.APPLICATION_JSON})
     public ResponseEntity<Compte> renvoyerCompteClient(@PathParam("idClient")long idClient, @PathParam("idCompte") long idCompte);
     
